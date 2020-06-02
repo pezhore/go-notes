@@ -1,6 +1,6 @@
-## 0.0.3-pre
+## 0.0.3
 
-Bumped version for dev.
+fixing makefile
 
 ## 0.0.2
 

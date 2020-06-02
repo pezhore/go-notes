@@ -1,5 +1,13 @@
-{{.Title}}
-other stuff
-{{if .Attendees}}
-Attendees: {{.Attendees}}
-{{end}}
+{{.Created}} - {{.Title}}
+Attendees: [ {{range .Attendees}} {{ . }}, {{end}} ]
+---
+
+# Notes
+
+## Final Thoughts
+
+## Committments
+
+| Who| What| When| Status |
+| ---| --- | --- | ---    |
+|    |     |     |        |

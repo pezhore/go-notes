@@ -2,15 +2,10 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"log"
 	"os"
-	"text/template"
 )
-
-type note struct {
-	Title     string `json:"title"`
-	Attendees string `json:"attendees"`
-}
 
 // GitCommit provided at build time
 var GitCommit string
@@ -23,31 +18,32 @@ var Version string
 
 func main() {
 
-	titlePtr := flag.String("title", "", "Title")
-	attendees := flag.String("attendees", "", "Attendees")
+	required := []string{"title"}
+	seen := make(map[string]bool)
+	titlePtr := flag.String("title", "", "(requried) Title of note")
+	attendeesPtr := flag.String("attendees", "", "(optional) List of Attendees")
+	outPtr := flag.String("out", "", "(optional) Output file name")
 
-	if *titlePtr == "" {
-		flag.PrintDefaults()
-		os.Exit(1)
+	flag.Parse()
+
+	flag.Visit(func(f *flag.Flag) { seen[f.Name] = true })
+	for _, req := range required {
+		if !seen[req] {
+			fmt.Fprintf(os.Stderr, "missing required -%s argument/flag\n\nUsage:\n", req)
+
+			flag.PrintDefaults()
+			os.Exit(2)
+		}
 	}
-
-	data := note{
-		Title:     *titlePtr,
-		Attendees: *attendees,
-	}
-
-	tmpl, err := template.ParseFiles("templates/one-on-one.md.j2")
+	templ := "one-on-one.md.j2"
+	note, err := NewNote(titlePtr, attendeesPtr, outPtr, &templ)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	f, err := os.Create("out.md")
+	err = note.CreateNote()
 	if err != nil {
 		log.Fatal(err)
 	}
-	err = tmpl.Execute(f, data)
-	if err != nil {
-		log.Fatal(err)
-	}
-	f.Close()
+
 }

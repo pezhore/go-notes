@@ -1,6 +1,7 @@
-## 0.0.2-pre
+## 0.0.2
 
-Bumped version for dev.
+Testing!
 
 ## 0.0.1
-Intial
+
+Intial version

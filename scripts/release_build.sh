@@ -5,7 +5,7 @@ declare -A args=(
   #[keyid]="416B71F32ED93F57B6DADA93A8F6BE96934A4E84"
 
   # The name of the target binary.
-  [binname]="terraform-provider-netbox"
+  [binname]="gn"
 
   # The build target
   [build_target]="build"

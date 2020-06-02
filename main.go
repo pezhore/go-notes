@@ -23,6 +23,7 @@ func main() {
 	titlePtr := flag.String("title", "", "(requried) Title of note")
 	attendeesPtr := flag.String("attendees", "", "(optional) List of Attendees")
 	outPtr := flag.String("out", "", "(optional) Output file name")
+	pathPtr := flag.String("path", "./", "(optional) Path to new note. Defaults to current directory")
 
 	flag.Parse()
 
@@ -36,7 +37,7 @@ func main() {
 		}
 	}
 	templ := "one-on-one.md.j2"
-	note, err := NewNote(titlePtr, attendeesPtr, outPtr, &templ)
+	note, err := NewNote(titlePtr, attendeesPtr, outPtr, pathPtr, &templ)
 	if err != nil {
 		log.Fatal(err)
 	}

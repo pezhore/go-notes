@@ -6,6 +6,7 @@ type Note struct {
 	Attendees   []string `json:"attendees"`
 	Created     string   `json:"created"`
 	Path        string   `json:"path"`
+	OutFile     string   `json:"out-file"`
 	Template    string   `json:"template"`
 	ActionItems []string `json:"action-items"`
 }

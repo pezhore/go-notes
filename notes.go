@@ -10,18 +10,19 @@ import (
 )
 
 // NewNote will return a note metadata object
-func NewNote(title *string, attendees *string, path *string, template *string) (*Note, error) {
+func NewNote(title *string, attendees *string, outfile *string, path *string, template *string) (*Note, error) {
 	note := Note{
 		Title:     *title,
 		Attendees: strings.Split(*attendees, " "),
 		Path:      *path,
+		OutFile:   *outfile,
 		Template:  *template,
 	}
 	now := time.Now()
 	note.Created = now.Format("2006-01-02")
 
-	if note.Path == "" {
-		note.Path = fmt.Sprintf("%s-%s.md", note.Created, strings.Replace(note.Title, " ", "-", -1))
+	if note.OutFile == "" {
+		note.OutFile = fmt.Sprintf("%s-%s.md", note.Created, strings.Replace(note.Title, " ", "-", -1))
 	}
 
 	return &note, nil
@@ -34,7 +35,7 @@ func (n *Note) CreateNote() error {
 		return err
 	}
 
-	f, err := os.Create(n.Path)
+	f, err := os.Create(fmt.Sprintf("%s/%s", n.Path, n.OutFile))
 	if err != nil {
 		log.Fatal(err)
 	}

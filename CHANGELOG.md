@@ -1,3 +1,7 @@
+## 0.0.3-pre
+
+Bumped version for dev.
+
 ## 0.0.2
 
 Testing!

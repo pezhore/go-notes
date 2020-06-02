@@ -1,3 +1,7 @@
+## 0.0.5-pre
+
+Bumped version for dev.
+
 ## 0.0.4
 
 working through builds

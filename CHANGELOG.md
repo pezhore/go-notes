@@ -1,6 +1,6 @@
-## 0.0.5-pre
+## 0.0.5
 
-Bumped version for dev.
+Bumpity bump
 
 ## 0.0.4
 
